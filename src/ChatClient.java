@@ -9,6 +9,10 @@ import java.awt.*;
 import java.awt.event.*;
 
 public class ChatClient extends Frame {
+
+	TextField tfTex = new TextField();
+	TextArea taContent = new TextArea();
+
 	public static void main(String[] args) {
 		new ChatClient().launchFrame();
 	}
@@ -16,7 +20,10 @@ public class ChatClient extends Frame {
 	public void launchFrame() {
 		setLocation(400, 300);
 		setSize(300, 300);
+		add(taContent, BorderLayout.NORTH);
+		add(tfTex, BorderLayout.SOUTH);
 		addWindowListener(new WindowMonitor());
+		pack();
 		setVisible(true);
 	}
 
