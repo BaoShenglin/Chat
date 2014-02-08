@@ -22,15 +22,13 @@ public class ChatClient extends Frame {
 		setSize(300, 300);
 		add(taContent, BorderLayout.NORTH);
 		add(tfTex, BorderLayout.SOUTH);
-		addWindowListener(new WindowMonitor());
+		addWindowListener(new WindowAdapter() {
+			public void windowClosing(WindowEvent e) {
+				System.exit(0);
+			}
+		});
 		pack();
 		setVisible(true);
 	}
 
-	class WindowMonitor extends WindowAdapter {
-		public void windowClosing(WindowEvent e) {
-			System.exit(0);
-		}
-	}
 }
-
