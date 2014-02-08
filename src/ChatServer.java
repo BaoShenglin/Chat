@@ -11,17 +11,22 @@ import java.io.*;
 
 public class ChatServer {
 
-
 	public static void main(String[] args) {
 		DataOutputStream dos = null;
 		DataInputStream dis = null;
 		boolean started = false;
+		ServerSocket ss = null;
+		Socket s = null;
 		try {
-			ServerSocket ss = new ServerSocket(8888);
+			ss = new ServerSocket(8888);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		try {
 			started = true;
 			while(started) {
 				boolean bConnected = false;
-				Socket s = ss.accept();
+				s = ss.accept();
 System.out.println("a client connected!");
 				bConnected = true;
 				dos = new DataOutputStream(s.getOutputStream());
@@ -30,10 +35,23 @@ System.out.println("a client connected!");
 					String str = dis.readUTF();
 					System.out.println(str);
 				}
-				dis.close();
+				// dis.close();
 			}
 		} catch (IOException e) {
-			e.printStackTrace();
+			// e.printStackTrace();
+			System.out.println("A client closed!");
+		} finally {
+			try {
+				if(dis != null) {
+					dis.close();
+				}
+				if(s != null) {
+					s.close();
+				}
+			} catch(IOException e) {
+				e.printStackTrace();
+			}
 		}
 	}
+
 }
