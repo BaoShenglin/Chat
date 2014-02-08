@@ -22,13 +22,22 @@ public class ChatClient extends Frame {
 		setSize(300, 300);
 		add(taContent, BorderLayout.NORTH);
 		add(tfTex, BorderLayout.SOUTH);
+		pack();
 		addWindowListener(new WindowAdapter() {
 			public void windowClosing(WindowEvent e) {
 				System.exit(0);
 			}
 		});
-		pack();
+		tfTex.addActionListener(new TFListener());
 		setVisible(true);
+	}
+
+	private class TFListener implements ActionListener {
+		public void actionPerformed(ActionEvent e) {
+			String str = tfTex.getText().trim();
+			taContent.setText(taContent.getText() + str);
+			tfTex.setText("");
+		}
 	}
 
 }
