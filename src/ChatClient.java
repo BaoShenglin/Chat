@@ -13,9 +13,10 @@ import java.io.*;
 public class ChatClient extends Frame {
 
 	Socket s = null;
+	DataOutputStream dos = null;
+	DataInputStream dis = null;
 
 	TextField tfTex = new TextField();
-
 	TextArea taContent = new TextArea();
 
 	public static void main(String[] args) {
@@ -30,6 +31,7 @@ public class ChatClient extends Frame {
 		pack();
 		addWindowListener(new WindowAdapter() {
 			public void windowClosing(WindowEvent e) {
+				disconnect();
 				System.exit(0);
 			}
 		});
@@ -41,11 +43,22 @@ public class ChatClient extends Frame {
 	public void connect() {
 		try {
 			s = new Socket("127.0.0.1", 8888);
+			dos = new DataOutputStream(s.getOutputStream());
+			dis = new DataInputStream(s.getInputStream());
 System.out.println("connected!");
 		} catch (UnknownHostException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
 			e.printStackTrace();
+		}
+	}
+
+	public void disconnect() {
+		try {
+			dos.close();
+			s.close();
+		} catch(IOException ioe) {
+			ioe.printStackTrace();
 		}
 	}
 
@@ -55,11 +68,8 @@ System.out.println("connected!");
 			taContent.setText(taContent.getText() + str);
 			tfTex.setText("");
 			try {
-				DataOutputStream dos = new DataOutputStream(s.getOutputStream());
-				DataInputStream dis = new DataInputStream(s.getInputStream());
 				dos.writeUTF(str);
 				dos.flush();
-				dos.close();
 			} catch (IOException ioe) {
 				ioe.printStackTrace();
 			}
