@@ -1,33 +1,33 @@
 # Chat platform
 ### Release Note : 
 1. version 0.1
-	Create a chat client, add a window, and provide a window closing event.
+- Create a chat client, add a window, and provide a window closing event.
 
-- version 0.2
-	Add a TextFiele and a TextArea, for provide input and display box.
+2. version 0.2
+- Add a TextFiele and a TextArea, for provide input and display box.
 
-- version 0.3
-	Modify the window closing event.
+3. version 0.3
+- Modify the window closing event.
 
-- version 0.4
-	Add TextFiele event processing.
+4. version 0.4
+- Add TextFiele event processing.
 
-- version 0.5
-	Create a chat server, ip = 127.0.0.1, port = 8888.
+5. version 0.5
+- Create a chat server, ip = 127.0.0.1, port = 8888.
 
-- version 0.6
-	Provide a connect method in the client program, make a client can connect to the server.
+6. version 0.6
+- Provide a connect method in the client program, make a client can connect to the server.
 
-- version 0.7
-	Client add a DataOutputStreama, and Server add a DataInputStream, make the client can send information to the server.
+7. version 0.7
+- Client add a DataOutputStreama, and Server add a DataInputStream, make the client can send information to the server.
 
-- version 0.8
-	Client add disconnect method, and Server can receive the multiple information.
+8. version 0.8
+- Client add disconnect method, and Server can receive the multiple information.
 
-- version 0.9
-	Fixed a Bug of Client to closed in the server program.
+9. version 0.9
+- Fixed a Bug of Client to closed in the server program.
 
-- version 1.0
-	Through the thread, the server can be connected to multiple clients, and catch a BindException.
+10. version 1.0
+- Through the thread, the server can be connected to multiple clients, and catch a BindException.
 
 
