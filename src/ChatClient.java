@@ -12,7 +12,10 @@ import java.io.*;
 
 public class ChatClient extends Frame {
 
+	Socket s = null;
+
 	TextField tfTex = new TextField();
+
 	TextArea taContent = new TextArea();
 
 	public static void main(String[] args) {
@@ -37,7 +40,7 @@ public class ChatClient extends Frame {
 
 	public void connect() {
 		try {
-			Socket s = new Socket("127.0.0.1", 8888);
+			s = new Socket("127.0.0.1", 8888);
 System.out.println("connected!");
 		} catch (UnknownHostException e) {
 			e.printStackTrace();
@@ -51,6 +54,15 @@ System.out.println("connected!");
 			String str = tfTex.getText().trim();
 			taContent.setText(taContent.getText() + str);
 			tfTex.setText("");
+			try {
+				DataOutputStream dos = new DataOutputStream(s.getOutputStream());
+				DataInputStream dis = new DataInputStream(s.getInputStream());
+				dos.writeUTF(str);
+				dos.flush();
+				dos.close();
+			} catch (IOException ioe) {
+				ioe.printStackTrace();
+			}
 		}
 	}
 

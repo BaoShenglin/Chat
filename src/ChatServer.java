@@ -16,6 +16,11 @@ public class ChatServer {
 			while(true) {
 				Socket s = ss.accept();
 System.out.println("a client connected!");
+				DataOutputStream dos = new DataOutputStream(s.getOutputStream());
+				DataInputStream dis = new DataInputStream(s.getInputStream());
+				String str = dis.readUTF();
+				System.out.println(str);
+				dis.close();
 			}
 		} catch (IOException e) {
 			e.printStackTrace();
