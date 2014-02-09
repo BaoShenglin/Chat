@@ -31,3 +31,12 @@
 10. version 1.0
 > Through the thread, the server can be connected to multiple clients, and catch a BindException.
 
+11. version 1.1
+> Use List to realize the information sent from the server to the client.
+
+12. version 1.2
+> The client can continue to receive information through the thread.
+
+13. version 1.3
+> Fixed SocketException and IOException.
+
