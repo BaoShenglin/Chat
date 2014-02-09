@@ -65,7 +65,7 @@ System.out.println("connected!");
 	private class TFListener implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
 			String str = tfTex.getText().trim();
-			taContent.setText(taContent.getText() + str);
+			taContent.setText(str);
 			tfTex.setText("");
 			try {
 				dos.writeUTF(str);
