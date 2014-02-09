@@ -20,6 +20,8 @@ public class ChatClient extends Frame {
 	TextField tfTex = new TextField();
 	TextArea taContent = new TextArea();
 
+	Thread tRecv = new Thread(new RecvThread());
+
 	public static void main(String[] args) {
 		new ChatClient().launchFrame();
 	}
@@ -39,7 +41,9 @@ public class ChatClient extends Frame {
 		tfTex.addActionListener(new TFListener());
 		setVisible(true);
 		connect();
-		new Thread(new RecvThread()).start();
+
+		// new Thread(new RecvThread()).start();
+		tRecv.start();
 	}
 
 	public void connect() {
@@ -59,10 +63,28 @@ System.out.println("connected!");
 	public void disconnect() {
 		try {
 			dos.close();
-			s.close();
-		} catch(IOException ioe) {
-			ioe.printStackTrace();
+			dis.close();
+			s.close();	
+		} catch (IOException e) {
+			e.printStackTrace();
 		}
+	
+		/*
+		try {
+			bConnected = false;
+			tRecv.join();
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				dos.close();
+				dis.close();
+				s.close();	
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+		*/
 	}
 
 	private class TFListener implements ActionListener {
@@ -87,9 +109,13 @@ System.out.println("connected!");
 					// System.out.println(str);
 					taContent.setText(taContent.getText() + str + '\n');
 				}
+			} catch (SocketException e) {
+				System.out.println("bye!");
+			} catch (EOFException e){
+				System.out.println("bye bye!");
 			} catch (IOException e) {
 				e.printStackTrace();
-			}
+			} 
 		}
 	}
 

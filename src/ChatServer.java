@@ -72,7 +72,9 @@ System.out.println("a client connected!");
 			try {
 				dos.writeUTF(str);
 			} catch (IOException e) {
-				e.printStackTrace();
+				clients.remove(this);
+				System.out.println("Other quit!");
+				// e.printStackTrace();
 			}
 		}
 
@@ -102,7 +104,10 @@ System.out.println(str);
 				try {
 					if(dis != null) dis.close();
 					if(dos != null) dos.close();
-					if(s != null) s.close();
+					if(s != null) {
+						s.close();
+						// s = null;
+					}
 				} catch(IOException e) {
 					e.printStackTrace();
 				}
